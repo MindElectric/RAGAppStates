@@ -3,7 +3,13 @@
 import { useChat } from "ai/react";
 import { ChatText } from "./ChatText";
 export default function Chat() {
-    const { messages, input, handleInputChange, handleSubmit } = useChat({ api: "/api/gemini" });
+    const { messages, input, handleInputChange, handleSubmit, data } = useChat({
+        api: "/api/gemini",
+        onError: (error) => console.error(error),
+    });
+
+    console.log(data);
+
     return (
         <>
             <div className="flex flex-col w-full h-screen">

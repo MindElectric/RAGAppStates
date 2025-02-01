@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/google": "^1.0.12",
-    "ai": "^4.0.22",
+    "@ai-sdk/google": "^1.1.7",
+    "@langchain/core": "^0.3.26",
+    "@langchain/google-genai": "^0.1.6",
+    "ai": "^4.1.13",
+    "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "daisyui": "^4.12.23",
+    "langchain": "^0.3.8",
     "next": "15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
