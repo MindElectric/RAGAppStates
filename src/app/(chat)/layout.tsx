@@ -1,4 +1,4 @@
-import { Chatbox } from "@/app/(chat)/components/Chatbox";
+import { Chatbox } from "@/app/components/chat/Chatbox";
 
 export default function ChatLayout({
     children
@@ -6,12 +6,12 @@ export default function ChatLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex justify-center items-center h-screen" data-theme="mytheme">
+        <div className="flex h-screen" data-theme="mytheme">
             <aside className="w-2/5">
                 <Chatbox />
             </aside>
             <div className="w-3/5">
-                <h1>{children}</h1>
+                <div className="flex-col">{children}</div>
             </div>
         </div>
     );
