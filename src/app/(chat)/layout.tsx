@@ -1,4 +1,6 @@
+'use client'
 import { Chatbox } from "@/app/components/chat/Chatbox";
+import { InitialMap } from "../components/map/InitialMap";
 
 export default function ChatLayout({
     children
@@ -11,7 +13,12 @@ export default function ChatLayout({
                 <Chatbox />
             </aside>
             <div className="w-3/5">
-                <div className="flex-col">{children}</div>
+                <div className="flex-col">
+                    <div className="w-full h-full">
+                        <InitialMap />
+                    </div>
+                    {children}
+                </div>
             </div>
         </div>
     );
