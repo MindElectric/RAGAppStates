@@ -1,14 +1,21 @@
 'use client';
-
+import { useEffect } from "react";
 import { useChat } from "ai/react";
 import { ChatText } from "./ChatText";
+import { useMessageStore } from "@/store/chat/store";
 export default function Chat() {
-    const { messages, input, handleInputChange, handleSubmit, data } = useChat({
+    const { messages, input, handleInputChange, handleSubmit, append } = useChat({
         api: "/api/gemini",
         onError: (error) => console.error(error),
     });
 
-    console.log(data);
+    const mapMessage = useMessageStore((state) => state.message);
+
+    useEffect(() => {
+        if (mapMessage) {
+            append({ content: mapMessage, role: "user" }); // Add map message to AI chat
+        }
+    }, [mapMessage]);
 
     return (
         <>

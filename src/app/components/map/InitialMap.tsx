@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import { useMessageStore } from '@/store/chat/store';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 
 import type { StatesGeometry } from '@/app/types/Topology';
@@ -13,6 +14,8 @@ const geoUrl = "https://raw.githubusercontent.com/Avzolem/alertaprensanext/refs/
 export const InitialMap = () => {
     const [selectedState, setSelectedState] = useState<number | null>(null);
     const [tooltip, setTooltip] = useState<{ name: string; x: number; y: number } | null>(null);
+
+    const sendMessage = useMessageStore((state) => state.sendMessage)
 
     return (
         <div className='h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] w-full'>
@@ -30,6 +33,7 @@ export const InitialMap = () => {
                     {tooltip.name}
                 </div>
             )}
+            {/* Map */}
             <ComposableMap
                 projection="geoMercator"
                 projectionConfig={{
@@ -42,11 +46,13 @@ export const InitialMap = () => {
                         geographies.map((geo: StatesGeometry) => {
                             const isSelected = geo.properties.state_code === selectedState;
                             return (
+                                // States
                                 <Geography
                                     key={geo.properties.state_name}
                                     geography={geo}
                                     className="cursor-pointer fill ease-in-out outline-none"
                                     onClick={() => {
+                                        sendMessage(`Dime lo que sabes de ${geo.properties.state_name}`)
                                         setSelectedState(geo.properties.state_code)
                                         setTooltip(null);
                                     }} // Set selected state ID on click
