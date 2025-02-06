@@ -15,6 +15,7 @@ export default function ChatLayout({
             <div className="w-3/5">
                 <div className="flex-col">
                     <div className="w-full h-full">
+                        <h1 className="text-center pt-5 text-4xl">Estados de Mexico</h1>
                         <InitialMap />
                     </div>
                     {children}

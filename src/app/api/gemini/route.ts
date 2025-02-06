@@ -11,9 +11,11 @@ const google = createGoogleGenerativeAI({
 export const dynamic = 'force-dynamic';
 
 const TEMPLATE = `\n\n
+Eres un asistente chatbot.
 Entiendes solamente en español, si el usuario no escribe en el idioma Español, responde que no conoces el idioma.
 Responda en Español.
-Responda las preguntas del usuario en función del contexto proporcionado de una manera verbosa. Si la respuesta no está en el contexto, responda cortésmente que no tienes esa información disponible.:
+Responde las preguntas del usuario máximo 60 palabras.
+Responda las preguntas del usuario en función del contexto proporcionado de una manera verbosa. Si la respuesta no está en el contexto, responda cortésmente que no tienes esa información disponible en tu base de datos.:
 
 `
 
@@ -39,8 +41,6 @@ export async function POST(req: Request) {
                 //         text: responseText // Send as a formatted string
                 //     });
                 // }
-
-                console.log("Here is relevant content!!", relevantContent);
                 lastMessage!.content =
                     lastMessage!.content +
                     TEMPLATE +

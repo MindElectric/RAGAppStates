@@ -4,8 +4,7 @@ import { useMessageStore } from '@/store/chat/store';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 
 import type { StatesGeometry } from '@/app/types/Topology';
-
-
+import Link from 'next/link';
 
 const geoUrl = "https://raw.githubusercontent.com/Avzolem/alertaprensanext/refs/heads/main/data/mx.json";
 
@@ -47,30 +46,32 @@ export const InitialMap = () => {
                             const isSelected = geo.properties.state_code === selectedState;
                             return (
                                 // States
-                                <Geography
-                                    key={geo.properties.state_name}
-                                    geography={geo}
-                                    className="cursor-pointer fill ease-in-out outline-none"
-                                    onClick={() => {
-                                        sendMessage(`Dime lo que sabes de ${geo.properties.state_name}`)
-                                        setSelectedState(geo.properties.state_code)
-                                        setTooltip(null);
-                                    }} // Set selected state ID on click
-                                    fill={isSelected ? "#FF5733" : "#E0E0E0"} // Change color if selected
-                                    stroke="#333"
-                                    strokeWidth={1}
-                                    onMouseEnter={(event) => {
-                                        const { clientX, clientY } = event; // Get mouse position
-                                        setTooltip({
-                                            name: geo.properties.state_name, // Show state name
-                                            x: clientX,
-                                            y: clientY,
-                                        });
-                                    }}
-                                    onMouseLeave={() => setTooltip(null)} // Hide tooltip on exit
+                                <Link href={`/states/${geo.properties.state_code}`} key={geo.properties.state_name}>
+                                    <Geography
+
+                                        geography={geo}
+                                        className="cursor-pointer fill ease-in-out outline-none"
+                                        onClick={() => {
+                                            // sendMessage(`Dime lo que sabes de ${geo.properties.state_name}`)
+                                            setSelectedState(geo.properties.state_code)
+                                            setTooltip(null);
+                                        }} // Set selected state ID on click
+                                        fill={isSelected ? "#DC848E" : "#E0E0E0"} // Change color if selected
+                                        stroke="#333"
+                                        strokeWidth={0.5}
+                                        onMouseEnter={(event) => {
+                                            const { clientX, clientY } = event; // Get mouse position
+                                            setTooltip({
+                                                name: geo.properties.state_name, // Show state name
+                                                x: clientX,
+                                                y: clientY,
+                                            });
+                                        }}
+                                        onMouseLeave={() => setTooltip(null)} // Hide tooltip on exit
 
 
-                                />
+                                    />
+                                </Link>
                             );
                         })
                     }
